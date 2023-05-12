@@ -54,7 +54,7 @@ module.exports = {
         return decrypted
     },
     randomPassword: function(length){
-        charset = "@#$&*0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ@#$&*0123456789abcdefghijklmnopqrstuvwxyz",
+        charset = "!#$%&()*+,-./:;<=>?@[\]^_{|}~0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ!#$%&()*+,-./:;<=>?@[\]^_`{|}~0123456789abcdefghijklmnopqrstuvwxyz",
         password = ""
         for (var i = 0, n = charset.length; i < length; i++) {
             password += charset.charAt(Math.floor(Math.random() * n))

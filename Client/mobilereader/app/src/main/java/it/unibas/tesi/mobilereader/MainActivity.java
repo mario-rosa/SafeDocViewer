@@ -85,7 +85,8 @@ public class MainActivity extends AppCompatActivity {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             new AlertDialog.Builder(MainActivity.this)
                     .setTitle("Permessi")
-                    .setMessage("Per cominciare è necessario consetire all'app i permessi per leggere, modificare ed eliminare i file sul dispositivo.\nCerca 'SecDoc Viewer' nell'elenco e spunta su 'Consenti l'accesso per gestire tutti i file'")
+                    .setMessage("Per cominciare è necessario consetire all'app i permessi per leggere, modificare ed eliminare i file sul dispositivo." +
+                            "\nCerca 'SecDoc Viewer' nell'elenco e spunta su 'Consenti l'accesso per gestire tutti i file'")
                     .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                         public void onClick( DialogInterface dialog, int which ) {
                             try {

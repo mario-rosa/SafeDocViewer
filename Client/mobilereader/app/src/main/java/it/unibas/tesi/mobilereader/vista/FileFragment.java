@@ -15,6 +15,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import java.util.List;
 
+import it.unibas.tesi.mobilereader.Constants;
 import it.unibas.tesi.mobilereader.R;
 import it.unibas.tesi.mobilereader.controllo.ControlStorage;
 import it.unibas.tesi.mobilereader.databinding.FragmentFileBinding;
@@ -34,6 +35,7 @@ public class FileFragment extends Fragment {
 
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        binding.logoutView.setVisibility(View.INVISIBLE);
         binding.infoview.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

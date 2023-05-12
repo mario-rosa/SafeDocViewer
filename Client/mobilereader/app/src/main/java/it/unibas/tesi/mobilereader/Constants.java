@@ -6,7 +6,7 @@ import okhttp3.JavaNetCookieJar;
 import okhttp3.OkHttpClient;
 
 public final class Constants{
-    public static String basicUrl = "https://bfde-79-31-56-227.ngrok.io";
+    public static String basicUrl = "http://000";
     public static OkHttpClient CLIENT = new OkHttpClient.Builder().cookieJar(new JavaNetCookieJar(new CookieManager())).build();
     public static User user = null;
 }

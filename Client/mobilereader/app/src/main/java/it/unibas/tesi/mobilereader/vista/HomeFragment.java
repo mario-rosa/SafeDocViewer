@@ -129,18 +129,17 @@ public class HomeFragment extends Fragment {
                         ControlHome.logout(new ApiCallBack() {
                             @Override
                             public void callback(boolean result, String message) {
+                                Modello.putBean("pdfList", null);
+                                Constants.user = null;
+                                ((MainActivity)requireActivity()).goToWelcomeFragment();
                                 if(result){
                                     Toast.makeText(requireContext(), "Logout ok", Toast.LENGTH_SHORT).show();
-                                    Modello.putBean("pdfList", null);
-                                    Constants.user = null;
-                                    ((MainActivity)requireActivity()).goToLoginFragment();
                                 }
                             }
                         });
                     }
                 })
                 // A null listener allows the button to dismiss the dialog and take no further action.
-                .setNegativeButton(android.R.string.no, null)
                 .setIcon(android.R.drawable.ic_dialog_info)
                 .show();
     }

@@ -1,13 +1,21 @@
 package it.unibas.tesi.mobilereader.vista;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,18 +26,22 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
+import it.unibas.tesi.mobilereader.Constants;
 import it.unibas.tesi.mobilereader.MainActivity;
 import it.unibas.tesi.mobilereader.R;
 import it.unibas.tesi.mobilereader.controllo.ControlStorage;
 import it.unibas.tesi.mobilereader.controllo.ControlHome;
 import it.unibas.tesi.mobilereader.modello.ApiCallBack;
 import it.unibas.tesi.mobilereader.modello.Documento;
+import it.unibas.tesi.mobilereader.modello.Modello;
 
 public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHolder> {
 
     private List<Documento> listaDocumenti;
     private AppCompatActivity activity;
     boolean downloading = false;
+    boolean errorDownlod = false;
+
 
     public DocumentAdapter(List<Documento> listaDocumenti, AppCompatActivity activity) {
         this.listaDocumenti = listaDocumenti;
@@ -111,20 +123,40 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
                         public void callback(boolean result, String message) {
                             if(result){
                                 System.out.println("File salvato in Archivio!");
+
                             }else{
                                 System.out.println("File non salvato!");
+                                errorDownlod = true;
                             }
                             downloading = false;
+                            if (errorDownlod)
+                                openAlertDialog(view.getContext());
                             notifyDataSetChanged();
                         }
                     }, ref);
                     return true;
                 }
+
                 return false;
             }
         });
         popupMenu.show();
     }
+    public void openAlertDialog(Context context){
+        new AlertDialog.Builder(context)
+                .setTitle("Errore")
+                .setMessage("Download non riuscito")
+                .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                })
+                // A null listener allows the button to dismiss the dialog and take no further action.
+
+                .setIcon(android.R.drawable.ic_dialog_alert)
+                .show();
+    }
+
     @Override
     public int getItemCount() {
         return listaDocumenti.size();
