@@ -19,6 +19,7 @@ import okhttp3.Response;
 
 public final class ControlLogin {
     public static void getKey(ApiCallBack apiCallBack) {
+        Encrypt.generateKeys();
         AtomicBoolean result = new AtomicBoolean(false);
         ExecutorService executor = Executors.newSingleThreadExecutor();
         Handler handler = new Handler(Looper.getMainLooper());

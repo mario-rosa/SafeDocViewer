@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,7 +37,6 @@ import it.unibas.tesi.mobilereader.modello.Documento;
 import it.unibas.tesi.mobilereader.modello.Modello;
 
 public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHolder> {
-
     private List<Documento> listaDocumenti;
     private AppCompatActivity activity;
     boolean downloading = false;
@@ -118,10 +118,12 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
                     return true;
                 }else if(item.getItemId() == R.id.action_popup_download && !downloading){
                     downloading = true;
+                    Toast.makeText(view.getContext(), "Download in corso", Toast.LENGTH_SHORT).show();
                     ControlHome.getPdf(activity, new ApiCallBack() {
                         @Override
                         public void callback(boolean result, String message) {
                             if(result){
+                                errorDownlod = false;
                                 System.out.println("File salvato in Archivio!");
 
                             }else{
@@ -134,6 +136,7 @@ public class DocumentAdapter extends RecyclerView.Adapter<DocumentAdapter.ViewHo
                             notifyDataSetChanged();
                         }
                     }, ref);
+
                     return true;
                 }
 

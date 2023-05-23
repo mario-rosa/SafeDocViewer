@@ -76,7 +76,7 @@ app.get("/getPdf/:id", async (req, res) => {
   const newPath = "enc\\" + path.substring(4) // path del file pdf con data mod
   const encPath = "enc\\" + path.substring(4,path.length-4) + "Enc" + req.session.user._id + ".pdf" // path del file pdf encripted
   const password = utility.randomPassword(16)
-  console.log(password) 
+  //console.log(password) 
   const options = {
     keyLength: 256,
     password: password,
@@ -120,7 +120,7 @@ app.get("/getPdf/:id", async (req, res) => {
     const enc = utility.encriptMessage(pdfJson, securitykey, initVector)
 
     res.send(enc)
-    //fs.unlinkSync(encPath)
+    fs.unlinkSync(encPath)
   })
 })
 

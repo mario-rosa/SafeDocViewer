@@ -38,7 +38,7 @@ public class PdfFragment extends Fragment {
             }
         }
         File result = new File(pdf.getPath());
-        binding.pdfView.fromFile(result).password(pdf.getPassword()).autoSpacing(true).load();
+        binding.pdfView.fromFile(result).password(pdf.getPassword()).autoSpacing(false).load();
     }
     @Override
     public void onDestroyView() {

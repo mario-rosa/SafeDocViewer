@@ -4,6 +4,7 @@ import static android.Manifest.permission.READ_EXTERNAL_STORAGE;
 import static android.Manifest.permission.WRITE_EXTERNAL_STORAGE;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
@@ -42,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(), new ActivityResultCallback<ActivityResult>() {
@@ -52,6 +54,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Permessi ottenuti", Toast.LENGTH_SHORT).show();
                     } else {
                         Toast.makeText(MainActivity.this, "Permessi negati", Toast.LENGTH_SHORT).show();
+
                         if(t){
                             finish();
                         }
@@ -59,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
                     }
                 } else {
                     Toast.makeText(MainActivity.this, "Permessi negati", Toast.LENGTH_SHORT).show();
+
                 }
             }
         });
@@ -67,7 +71,6 @@ public class MainActivity extends AppCompatActivity {
         } else {
             requestPermission();
         }
-        Encrypt.generateKeys();
         initStartFragment();
     }
 
@@ -104,8 +107,8 @@ public class MainActivity extends AppCompatActivity {
                     .setCancelable(false)
                     .show();
 
-        } else {
 
+        } else {
             ActivityCompat.requestPermissions(MainActivity.this, permissions, 30);
         }
     }
